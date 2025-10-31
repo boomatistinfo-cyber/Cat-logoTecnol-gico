@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmericanShopCrew - Tecnología Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0071e3;
+            --secondary-color: #86868b;
+            --background-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --white: #ffffff;
+            --black: #000000;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+            z-index: -1;
+        }
+
+        .hero-content {
+            color: var(--white);
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Productos Section */
+        .product-category {
+            margin-bottom: 60px;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--black);
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: #f5f5f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            max-width: 80%;
+            max-height: 80%;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--black);
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .product-features li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-features i {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .product-btn {
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        /* Calidad Section */
+        .quality-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .quality-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .quality-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .quality-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(0, 113, 227, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .quality-icon i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .quality-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        .quality-list {
+            list-style: none;
+        }
+
+        .quality-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quality-list i {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        /* Mayoristas Section */
+        .mayoristas-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .mayoristas-step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        .step-description {
+            color: var(--secondary-color);
+        }
+
+        .envios-info {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .envios-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+
+        .envios-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .envios-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .envios-list i {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #86868b;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #86868b;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 10px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="LOGO.png" alt="AmericanShopCrew Logo">
+                    <div class="logo-text">AmericanShopCrew</div>
+                </div>
+                <nav>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#calidad">Calidad</a></li>
+                        <li><a href="#mayoristas">Mayoristas</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="iphone224444_1.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Tecnología Premium desde EE.UU. a Colombia</h1>
+            <p>Distribuimos iPhone, MacBook, iPad, Apple Watch y accesorios originales con garantía, precios mayoristas y envío seguro hasta Colombia.</p>
+            <div class="cta-buttons">
+                <a href="#productos" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Ver Productos</a>
+                <a href="#mayoristas" class="btn btn-secondary"><i class="fas fa-users"></i> Ser Mayorista</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Section -->
+    <section id="productos" class="productos">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Productos Disponibles</h2>
+                <p class="section-subtitle">Apple y tecnología premium - PRECIOS SUJETOS A CAMBIOS</p>
+            </div>
+            
+            <!-- iPhone -->
+            <div class="product-category">
+                <h3 class="category-title">iPhone</h3>
+                <div class="product-grid">
+                    <!-- iPhone 17 Pro Max -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="iPhone-17-pro-max.png" alt="iPhone 17 Pro Max">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">iPhone 17 Pro Max</h3>
+                            <div class="product-price">Desde $2,000 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Nuevo y CPO</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2017%20Pro%20Max" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- iPhone 16 Pro -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="iphone 16porr.png" alt="iPhone 16 Pro">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">iPhone 16 Pro</h3>
+                            <div class="product-price">Desde $1,500 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Nuevo y CPO</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2016%20Pro" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- iPhone 15 Pro -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="iPhone 15.png" alt="iPhone 15 Pro">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">iPhone 15 Pro</h3>
+                            <div class="product-price">Desde $1,200 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Nuevo y CPO</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2015%20Pro" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- iPhone 14 Pro -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="iPhone 14.png" alt="iPhone 14 Pro">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">iPhone 14 Pro</h3>
+                            <div class="product-price">Desde $900 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Nuevo y CPO</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2014%20Pro" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- iPhone 13 Pro Max -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="iPhone 13.png" alt="iPhone 13 Pro Max">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">iPhone 13 Pro Max</h3>
+                            <div class="product-price">Desde $700 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Nuevo y CPO</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2013%20Pro%20Max" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- iPhone Usados Premium -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="iPhone-usados.png" alt="iPhone Usados Premium">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">iPhone Usados Premium</h3>
+                            <div class="product-price">Desde $175 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> iPhone 11, 12, 13, 14, 15</li>
+                                <li><i class="fas fa-check"></i> 100% Funcionales</li>
+                                <li><i class="fas fa-check"></i> Garantía 30 días</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPhone%20usados%20premium" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MacBook & iPad -->
+            <div class="product-category">
+                <h3 class="category-title">MacBook & iPad</h3>
+                <div class="product-grid">
+                    <!-- MacBook Air M4/M3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="mac m3.jpg" alt="MacBook Air M4/M3">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">MacBook Air M4/M3</h3>
+                            <div class="product-price">Desde $855 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Chip M4 o M3</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20MacBook%20Air%20M4/M3" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- MacBook Pro M4 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="mac m4.jpg" alt="MacBook Pro M4">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">MacBook Pro M4</h3>
+                            <div class="product-price">Desde $1,320 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> 14" o 16"</li>
+                                <li><i class="fas fa-check"></i> Chip M4</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20MacBook%20Pro%20M4" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- iPad Pro M4 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="ipad pro1.jpg" alt="iPad Pro M4">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">iPad Pro M4</h3>
+                            <div class="product-price">Desde $845 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> 11" o 13"</li>
+                                <li><i class="fas fa-check"></i> Chip M4</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPad%20Pro%20M4" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- iPad Mini y Air -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="ipad air.jpg" alt="iPad Mini y Air">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">iPad Mini y Air</h3>
+                            <div class="product-price">Desde $300 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Varios modelos</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía Apple</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPad%20Mini%20y%20Air" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Apple Watch -->
+            <div class="product-category">
+                <h3 class="category-title">Apple Watch</h3>
+                <div class="product-grid">
+                    <!-- Apple Watch Ultra 3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="ultra 3.jpg" alt="Apple Watch Ultra 3">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Apple Watch Ultra 3</h3>
+                            <div class="product-price">Desde $625 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Modelo 2025</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20Watch%20Ultra%203" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- Apple Watch Series 11 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="series 11.png" alt="Apple Watch Series 11">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Apple Watch Series 11</h3>
+                            <div class="product-price">Desde $365 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Modelo 2025</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
+                                <li><i class="fas fa-check"></i> Garantía</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20Watch%20Series%2011" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Accesorios -->
+            <div class="product-category">
+                <h3 class="category-title">Accesorios Originales</h3>
+                <div class="product-grid">
+                    <!-- AirPods Pro 3 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="pro 3.jpg" alt="AirPods Pro 3">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">AirPods Pro 3</h3>
+                            <div class="product-price">$265 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Modelo 2025</li>
+                                <li><i class="fas fa-check"></i> Cancelación Activa</li>
+                                <li><i class="fas fa-check"></i> Garantía</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20AirPods%20Pro%203" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- AirPods Max -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="pro max.jpg" alt="AirPods Max">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">AirPods Max</h3>
+                            <div class="product-price">$460 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Cancelación Activa</li>
+                                <li><i class="fas fa-check"></i> Alta fidelidad</li>
+                                <li><i class="fas fa-check"></i> Garantía</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20AirPods%20Max" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- Apple TV -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="tv.jpg" alt="Apple TV 128GB">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Apple TV 128GB</h3>
+                            <div class="product-price">$140 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> 128GB</li>
+                                <li><i class="fas fa-check"></i> 4K HDR</li>
+                                <li><i class="fas fa-check"></i> Garantía</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20TV%20128GB" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+
+                    <!-- Pencil Pro -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="pecil.jpg" alt="Pencil Pro">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Pencil Pro</h3>
+                            <div class="product-price">$125 USD</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check"></i> Compatible iPad Pro</li>
+                                <li><i class="fas fa-check"></i> Precisión máxima</li>
+                                <li><i class="fas fa-check"></i> Garantía</li>
+                            </ul>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Pencil%20Pro" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calidad Section -->
+    <section id="calidad" class="calidad">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Conoce los tipos de iPhone que ofrecemos</h2>
+                <p class="section-subtitle">Calidad garantizada en todos nuestros productos</p>
+            </div>
+            <div class="quality-cards">
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="quality-title">CPO (Certified Pre-Owned)</h3>
+                    <ul class="quality-list">
+                        <li><i class="fas fa-check"></i> Equipos reacondicionados directamente por Apple</li>
+                        <li><i class="fas fa-check"></i> Incluyen piezas originales y empaque oficial</li>
+                        <li><i class="fas fa-check"></i> 1 año de garantía Apple</li>
+                        <li><i class="fas fa-check"></i> Ideal para tener un iPhone como nuevo a precio menor</li>
+                    </ul>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="quality-title">Usados (Grade A y B)</h3>
+                    <ul class="quality-list">
+                        <li><i class="fas fa-check"></i> Equipos 100% funcionales, probados y verificados</li>
+                        <li><i class="fas fa-check"></i> Batería con más de 80% de salud</li>
+                        <li><i class="fas fa-check"></i> Sin alertas de piezas cambiadas ni bloqueos</li>
+                        <li><i class="fas fa-check"></i> Garantía de 30 días directamente con la tienda</li>
+                    </ul>
+                </div>
+
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="quality-title">Calidad Garantizada</h3>
+                    <ul class="quality-list">
+                        <li><i class="fas fa-check"></i> Originales y liberados</li>
+                        <li><i class="fas fa-check"></i> Sin partes no genuinas</li>
+                        <li><i class="fas fa-check"></i> Testeados antes del envío</li>
+                        <li><i class="fas fa-check"></i> Empaque y cargador incluidos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mayoristas Section -->
+    <section id="mayoristas" class="mayoristas">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cómo hacer parte de nuestro sistema mayorista</h2>
+                <p class="section-subtitle">Compras desde 6 unidades en adelante con precios especiales y descuentos por volumen</p>
+            </div>
+
+            <div class="mayoristas-content">
+                <div class="mayoristas-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">¿Qué es ser mayorista?</h3>
+                    <p class="step-description">Accedes a precios especiales, descuentos por volumen y prioridad de stock. Soporte personalizado para pedidos grandes y asesoría en modelos.</p>
+                </div>
+
+                <div class="mayoristas-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Envíos y entregas</h3>
+                    <p class="step-description">Los productos salen directamente desde Estados Unidos. Envíos seguros a toda Colombia con empresas centro logístico o puerta a puerta.</p>
+                </div>
+
+                <div class="mayoristas-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Cómo hacer tu pedido</h3>
+                    <p class="step-description">Elige modelos y cantidades, solicita cotización, recibe confirmación y realiza el pago. Tiempo de entrega: 10 a 12 días hábiles.</p>
+                </div>
+            </div>
+
+            <div class="envios-info">
+                <h3 class="envios-title">Formas de pago</h3>
+                <ul class="envios-list">
+                    <li><i class="fas fa-check"></i> Transferencias internacionales</li>
+                    <li><i class="fas fa-check"></i> Bancolombia, tarjetas crédito/débito</li>
+                    <li><i class="fas fa-check"></i> Criptomonedas</li>
+                    <li><i class="fas fa-check"></i> Pago 30% antes del envío</li>
+                    <li><i class="fas fa-check"></i> Pagos en pesos colombianos o dólares</li>
+                    <li><i class="fas fa-check"></i> Zelle, Wire Transfer Internacional</li>
+                </ul>
+                <a href="https://wa.me/17864676442" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Contactar por WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AmericanShopCrew</h3>
+                    <p>Tu proveedor de confianza en tecnología Apple y dispositivos originales. Trabajamos directamente con distribuidores oficiales en EE.UU.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Productos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#productos">iPhone</a></li>
+                        <li><a href="#productos">MacBook</a></li>
+                        <li><a href="#productos">iPad</a></li>
+                        <li><a href="#productos">Apple Watch</a></li>
+                        <li><a href="#productos">Accesorios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> +1 (786) 467-6442</li>
+                        <li><i class="fas fa-envelope"></i> info@americanshopcrew.com</li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/17864676442">WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AmericanShopCrew. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a, .cta-buttons a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.querySelector('nav ul').classList.remove('active');
+            });
+        });
+
+        // Section animation on scroll
+        const sections = document.querySelectorAll('section');
+        
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('nav') && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
