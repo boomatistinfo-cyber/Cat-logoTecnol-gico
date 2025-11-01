@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0071e3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>AmericanShopCrew - Tecnología Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,12 +26,18 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .container {
@@ -40,8 +49,9 @@
 
         /* Header */
         header {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
@@ -65,6 +75,7 @@
 
         .logo img {
             height: 40px;
+            max-width: 100%;
         }
 
         .logo-text {
@@ -113,6 +124,7 @@
             font-size: 1.5rem;
             color: var(--text-color);
             cursor: pointer;
+            z-index: 1001;
         }
 
         /* Hero Section */
@@ -155,14 +167,14 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
             margin-bottom: 20px;
             animation: fadeInUp 1s ease;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             margin-bottom: 30px;
             animation: fadeInUp 1s ease 0.2s both;
         }
@@ -187,6 +199,9 @@
             cursor: pointer;
             text-align: center;
             justify-content: center;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -217,7 +232,7 @@
 
         /* Sections */
         section {
-            padding: 100px 0;
+            padding: 80px 0;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
@@ -234,14 +249,14 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 700;
             margin-bottom: 15px;
             color: var(--black);
         }
 
         .section-subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--secondary-color);
             max-width: 700px;
             margin: 0 auto;
@@ -253,7 +268,7 @@
         }
 
         .category-title {
-            font-size: 1.8rem;
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
             font-weight: 600;
             margin-bottom: 30px;
             color: var(--black);
@@ -308,6 +323,8 @@
             max-width: 80%;
             max-height: 80%;
             transition: var(--transition);
+            width: auto;
+            height: auto;
         }
 
         .product-card:hover .product-image img {
@@ -544,6 +561,61 @@
             }
         }
 
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            z-index: 999;
+            transition: var(--transition);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.2rem;
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .hero h1 {
@@ -556,6 +628,11 @@
         }
 
         @media (max-width: 768px) {
+            .hero {
+                height: 70vh;
+                min-height: 500px;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -566,19 +643,6 @@
             
             nav ul {
                 display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--white);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                text-align: center;
-            }
-            
-            nav ul.active {
-                display: flex;
             }
             
             .mobile-menu-btn {
@@ -595,9 +659,23 @@
                 max-width: 250px;
                 justify-content: center;
             }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .quality-cards,
+            .mayoristas-content {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 576px) {
+            .hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+            
             .hero h1 {
                 font-size: 2rem;
             }
@@ -607,16 +685,47 @@
             }
             
             .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            nav ul {
-                gap: 10px;
+                flex-direction: row;
             }
             
             .product-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 180px;
+            }
+
+            .quality-card,
+            .envios-info {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-content {
+                padding: 0 15px;
+            }
+
+            .product-info {
+                padding: 15px;
+            }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -631,7 +740,7 @@
                     <div class="logo-text">AmericanShopCrew</div>
                 </div>
                 <nav>
-                    <button class="mobile-menu-btn">
+                    <button class="mobile-menu-btn" aria-label="Abrir menú">
                         <i class="fas fa-bars"></i>
                     </button>
                     <ul>
@@ -645,9 +754,20 @@
         </div>
     </header>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#calidad">Calidad</a></li>
+            <li><a href="#mayoristas">Mayoristas</a></li>
+        </ul>
+    </div>
+
     <!-- Hero Section -->
     <section id="inicio" class="hero">
-        <video autoplay muted loop class="hero-video">
+        <video autoplay muted loop playsinline class="hero-video">
             <source src="iphone224444_1 (1) (1) (1) (1) (2).mp4" type="video/mp4">
             Tu navegador no soporta el elemento de video.
         </video>
@@ -687,7 +807,7 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2017%20Pro%20Max" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2017%20Pro%20Max" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -704,7 +824,7 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2016%20Pro" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2016%20Pro" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -721,7 +841,7 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2015%20Pro" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2015%20Pro" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -738,7 +858,7 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2014%20Pro" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2014%20Pro" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -755,7 +875,7 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2013%20Pro%20Max" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20iPhone%2013%20Pro%20Max" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -772,7 +892,7 @@
                                 <li><i class="fas fa-check"></i> 100% Funcionales</li>
                                 <li><i class="fas fa-check"></i> Garantía 30 días</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPhone%20usados%20premium" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPhone%20usados%20premium" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
                 </div>
@@ -795,7 +915,7 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20MacBook%20Air%20M4/M3" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20MacBook%20Air%20M4/M3" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -812,7 +932,7 @@
                                 <li><i class="fas fa-check"></i> Chip M4</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20MacBook%20Pro%20M4" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20MacBook%20Pro%20M4" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -829,7 +949,7 @@
                                 <li><i class="fas fa-check"></i> Chip M4</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPad%20Pro%20M4" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPad%20Pro%20M4" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -846,7 +966,7 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía Apple</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPad%20Mini%20y%20Air" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20iPad%20Mini%20y%20Air" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
                 </div>
@@ -869,7 +989,7 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20Watch%20Ultra%203" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20Watch%20Ultra%203" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
 
@@ -886,81 +1006,24 @@
                                 <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20Watch%20Series%2011" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20Watch%20Series%2011" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Accesorios -->
-            <div class="product-category">
-                <h3 class="category-title">Accesorios Originales</h3>
-                <div class="product-grid">
-                    <!-- AirPods Pro 3 -->
+
+                    <!-- Apple Watch SE -->
                     <div class="product-card">
                         <div class="product-image">
-                            <img src="pro 3.jpg" alt="AirPods Pro 3">
+                            <img src="se.jpg" alt="Apple Watch SE">
                         </div>
                         <div class="product-info">
-                            <h3 class="product-name">AirPods Pro 3</h3>
-                            <div class="product-price">$265 USD</div>
+                            <h3 class="product-name">Apple Watch SE</h3>
+                            <div class="product-price">Desde $200 USD</div>
                             <ul class="product-features">
                                 <li><i class="fas fa-check"></i> Modelo 2025</li>
-                                <li><i class="fas fa-check"></i> Cancelación Activa</li>
+                                <li><i class="fas fa-check"></i> 100% Original</li>
                                 <li><i class="fas fa-check"></i> Garantía</li>
                             </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20AirPods%20Pro%203" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
-                        </div>
-                    </div>
-
-                    <!-- AirPods Max -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="pro max.jpg" alt="AirPods Max">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">AirPods Max</h3>
-                            <div class="product-price">$460 USD</div>
-                            <ul class="product-features">
-                                <li><i class="fas fa-check"></i> Cancelación Activa</li>
-                                <li><i class="fas fa-check"></i> Alta fidelidad</li>
-                                <li><i class="fas fa-check"></i> Garantía</li>
-                            </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20AirPods%20Max" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
-                        </div>
-                    </div>
-
-                    <!-- Apple TV -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="tv.jpg" alt="Apple TV 128GB">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Apple TV 128GB</h3>
-                            <div class="product-price">$140 USD</div>
-                            <ul class="product-features">
-                                <li><i class="fas fa-check"></i> 128GB</li>
-                                <li><i class="fas fa-check"></i> 4K HDR</li>
-                                <li><i class="fas fa-check"></i> Garantía</li>
-                            </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20TV%20128GB" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
-                        </div>
-                    </div>
-
-                    <!-- Pencil Pro -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="pecil.jpg" alt="Pencil Pro">
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Pencil Pro</h3>
-                            <div class="product-price">$125 USD</div>
-                            <ul class="product-features">
-                                <li><i class="fas fa-check"></i> Compatible iPad Pro</li>
-                                <li><i class="fas fa-check"></i> Precisión máxima</li>
-                                <li><i class="fas fa-check"></i> Garantía</li>
-                            </ul>
-                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Pencil%20Pro" class="btn btn-primary product-btn" target="_blank"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                            <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20Apple%20Watch%20SE" class="btn btn-primary product-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Cotizar</a>
                         </div>
                     </div>
                 </div>
@@ -972,46 +1035,44 @@
     <section id="calidad" class="calidad">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Conoce los tipos de iPhone que ofrecemos</h2>
-                <p class="section-subtitle">Calidad garantizada en todos nuestros productos</p>
+                <h2 class="section-title">Calidad Garantizada</h2>
+                <p class="section-subtitle">Todos nuestros productos pasan por rigurosos controles de calidad</p>
             </div>
             <div class="quality-cards">
                 <div class="quality-card">
                     <div class="quality-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h3 class="quality-title">CPO (Certified Pre-Owned)</h3>
-                    <ul class="quality-list">
-                        <li><i class="fas fa-check"></i> Equipos reacondicionados directamente por Apple</li>
-                        <li><i class="fas fa-check"></i> Incluyen piezas originales y empaque oficial</li>
-                        <li><i class="fas fa-check"></i> 1 año de garantía Apple</li>
-                        <li><i class="fas fa-check"></i> Ideal para tener un iPhone como nuevo a precio menor</li>
-                    </ul>
-                </div>
-
-                <div class="quality-card">
-                    <div class="quality-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="quality-title">Usados (Grade A y B)</h3>
-                    <ul class="quality-list">
-                        <li><i class="fas fa-check"></i> Equipos 100% funcionales, probados y verificados</li>
-                        <li><i class="fas fa-check"></i> Batería con más de 80% de salud</li>
-                        <li><i class="fas fa-check"></i> Sin alertas de piezas cambiadas ni bloqueos</li>
-                        <li><i class="fas fa-check"></i> Garantía de 30 días directamente con la tienda</li>
-                    </ul>
-                </div>
-
-                <div class="quality-card">
-                    <div class="quality-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3 class="quality-title">Calidad Garantizada</h3>
+                    <h3 class="quality-title">Productos Originales</h3>
+                    <p>Todos nuestros dispositivos son 100% originales de Apple, con garantía y compatibilidad total.</p>
                     <ul class="quality-list">
-                        <li><i class="fas fa-check"></i> Originales y liberados</li>
-                        <li><i class="fas fa-check"></i> Sin partes no genuinas</li>
-                        <li><i class="fas fa-check"></i> Testeados antes del envío</li>
-                        <li><i class="fas fa-check"></i> Empaque y cargador incluidos</li>
+                        <li><i class="fas fa-check"></i> Garantía oficial Apple</li>
+                        <li><i class="fas fa-check"></i> Compatibilidad total</li>
+                        <li><i class="fas fa-check"></i> Actualizaciones oficiales</li>
+                    </ul>
+                </div>
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="quality-title">Inspección Rigurosa</h3>
+                    <p>Cada dispositivo pasa por múltiples controles de calidad antes de ser enviado.</p>
+                    <ul class="quality-list">
+                        <li><i class="fas fa-check"></i> Pruebas de funcionalidad</li>
+                        <li><i class="fas fa-check"></i> Verificación de autenticidad</li>
+                        <li><i class="fas fa-check"></i> Inspección física completa</li>
+                    </ul>
+                </div>
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="quality-title">Envío Seguro</h3>
+                    <p>Garantizamos que tus productos lleguen en perfectas condiciones hasta Colombia.</p>
+                    <ul class="quality-list">
+                        <li><i class="fas fa-check"></i> Empaque seguro</li>
+                        <li><i class="fas fa-check"></i> Seguro de envío incluido</li>
+                        <li><i class="fas fa-check"></i> Tracking en tiempo real</li>
                     </ul>
                 </div>
             </div>
@@ -1022,41 +1083,36 @@
     <section id="mayoristas" class="mayoristas">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Cómo hacer parte de nuestro sistema mayorista</h2>
-                <p class="section-subtitle">Compras desde 6 unidades en adelante con precios especiales y descuentos por volumen</p>
+                <h2 class="section-title">Programa Mayorista</h2>
+                <p class="section-subtitle">Únete a nuestro programa mayorista y obtén los mejores precios</p>
             </div>
-
             <div class="mayoristas-content">
                 <div class="mayoristas-step">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">¿Qué es ser mayorista?</h3>
-                    <p class="step-description">Accedes a precios especiales, descuentos por volumen y prioridad de stock. Soporte personalizado para pedidos grandes y asesoría en modelos.</p>
+                    <h3 class="step-title">Regístrate</h3>
+                    <p class="step-description">Completa nuestro formulario de registro para mayoristas y accede a precios exclusivos.</p>
                 </div>
-
                 <div class="mayoristas-step">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Envíos y entregas</h3>
-                    <p class="step-description">Los productos salen directamente desde Estados Unidos. Envíos seguros a toda Colombia con empresas centro logístico o puerta a puerta.</p>
+                    <h3 class="step-title">Realiza tu Pedido</h3>
+                    <p class="step-description">Haz tu pedido mínimo de $2,000 USD y obtén descuentos especiales por volumen.</p>
                 </div>
-
                 <div class="mayoristas-step">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Cómo hacer tu pedido</h3>
-                    <p class="step-description">Elige modelos y cantidades, solicita cotización, recibe confirmación y realiza el pago. Tiempo de entrega: 10 a 12 días hábiles.</p>
+                    <h3 class="step-title">Recibe tu Producto</h3>
+                    <p class="step-description">Tu pedido llegará a Colombia en 7-10 días hábiles con todos los seguros incluidos.</p>
                 </div>
             </div>
-
             <div class="envios-info">
-                <h3 class="envios-title">Formas de pago</h3>
+                <h3 class="envios-title">Información de Envíos</h3>
                 <ul class="envios-list">
-                    <li><i class="fas fa-check"></i> Transferencias internacionales</li>
-                    <li><i class="fas fa-check"></i> Bancolombia, tarjetas crédito/débito</li>
-                    <li><i class="fas fa-check"></i> Criptomonedas</li>
-                    <li><i class="fas fa-check"></i> Pago 30% antes del envío</li>
-                    <li><i class="fas fa-check"></i> Pagos en pesos colombianos o dólares</li>
-                    <li><i class="fas fa-check"></i> Zelle, Wire Transfer Internacional</li>
+                    <li><i class="fas fa-check"></i> <strong>Envío Express:</strong> 7-10 días hábiles</li>
+                    <li><i class="fas fa-check"></i> <strong>Pedido Mínimo:</strong> $2,000 USD para mayoristas</li>
+                    <li><i class="fas fa-check"></i> <strong>Seguro:</strong> Incluido en todos los envíos</li>
+                    <li><i class="fas fa-check"></i> <strong>Tracking:</strong> Disponible 24/7</li>
+                    <li><i class="fas fa-check"></i> <strong>Atención al Cliente:</strong> Soporte personalizado</li>
                 </ul>
-                <a href="https://wa.me/17864676442" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Contactar por WhatsApp</a>
+                <a href="https://wa.me/17864676442?text=Hola,%20estoy%20interesado%20en%20el%20programa%20mayorista" class="btn btn-primary" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Contactar para Mayoristas</a>
             </div>
         </div>
     </section>
@@ -1067,24 +1123,23 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>AmericanShopCrew</h3>
-                    <p>Tu proveedor de confianza en tecnología Apple y dispositivos originales. Trabajamos directamente con distribuidores oficiales en EE.UU.</p>
+                    <p>Distribuidores oficiales de tecnología Apple desde Estados Unidos a Colombia con los mejores precios y calidad garantizada.</p>
                 </div>
                 <div class="footer-column">
-                    <h3>Productos</h3>
+                    <h3>Enlaces Rápidos</h3>
                     <ul class="footer-links">
-                        <li><a href="#productos">iPhone</a></li>
-                        <li><a href="#productos">MacBook</a></li>
-                        <li><a href="#productos">iPad</a></li>
-                        <li><a href="#productos">Apple Watch</a></li>
-                        <li><a href="#productos">Accesorios</a></li>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#calidad">Calidad</a></li>
+                        <li><a href="#mayoristas">Mayoristas</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contacto</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-phone"></i> +1 (786) 467-6442</li>
-                        <li><i class="fas fa-envelope"></i> info@americanshopcrew.com</li>
-                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/17864676442">WhatsApp</a></li>
+                        <li><a href="https://wa.me/17864676442" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp: +1 (786) 467-6442</a></li>
+                        <li><a href="mailto:ventas@americanshopcrew.com"><i class="fas fa-envelope"></i> ventas@americanshopcrew.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Miami, Florida - EE.UU.</a></li>
                     </ul>
                 </div>
             </div>
@@ -1095,69 +1150,96 @@
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a, .cta-buttons a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetSection.offsetTop - 70,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                document.querySelector('nav ul').classList.remove('active');
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+            
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('active');
+                mobileMenuOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            }
+            
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+            
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
             });
-        });
-
-        // Section animation on scroll
-        const sections = document.querySelectorAll('section');
-        
-        const observerOptions = {
-            threshold: 0.1
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+            
+            // Scroll Animation
+            const sections = document.querySelectorAll('section');
+            
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.85) {
+                        section.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+            
+            // Header scroll effect
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
                 }
             });
-        }, observerOptions);
-        
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Header background on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-            } else {
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Video optimization for mobile
+            const heroVideo = document.querySelector('.hero-video');
+            
+            // Pause video on mobile to save data and improve performance
+            if (window.innerWidth <= 768) {
+                heroVideo.setAttribute('muted', '');
+                heroVideo.setAttribute('playsinline', '');
+                heroVideo.setAttribute('preload', 'metadata');
             }
-        });
-
-        // Mobile menu toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('nav ul');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('nav') && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-            }
+            
+            // Add loading="lazy" to all images for better performance
+            document.querySelectorAll('img').forEach(img => {
+                img.setAttribute('loading', 'lazy');
+            });
         });
     </script>
 </body>
-
 </html>
 
